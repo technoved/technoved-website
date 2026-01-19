@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title || 'Services' %> | DigitalPro
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ===============================
+   GLOBAL VARIABLES
+================================ */
+    :root {
+      --primary: #7c3aed;
+      --secondary: #5b21b6;
+      --accent: #a855f7;
+
+      --bg-dark: #0b0614;
+      --bg-card: #141033;
+      --bg-soft: #0f172a;
+
+      --text-main: #f5f3ff;
+      --text-muted: #c4b5fd;
+
+      --border: #2e1065;
+
+      --shadow: 0 10px 30px rgba(124, 58, 237, 0.25);
+      --shadow-lg: 0 18px 50px rgba(124, 58, 237, 0.45);
+
+      --transition: all 0.35s ease;
+    }
+
+    /* ===============================
+   RESET & BASE
+================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", "Poppins", sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    /* ===============================
+   PAGE HEADER
+================================ */
+    .page-header {
+      padding: 100px 0 70px;
+      text-align: center;
+      background: linear-gradient(135deg,
+          rgba(124, 58, 237, 0.25),
+          rgba(91, 33, 182, 0.35));
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-header h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .page-header p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: auto;
+    }
+
+    /* ===============================
+   SERVICES SECTION
+================================ */
+    .services-page {
+      padding: 90px 0;
+    }
+
+    .service-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+    }
+
+    /* ===============================
+   SERVICE CARD
+================================ */
+    .service-box {
+      background: linear-gradient(180deg,
+          rgba(124, 58, 237, 0.05),
+          rgba(124, 58, 237, 0.01));
+      border: 1px solid rgba(124, 58, 237, 0.18);
+      border-radius: 18px;
+      padding: 2.2rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right,
+          rgba(124, 58, 237, 0.15),
+          transparent 60%);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .service-box:hover::before {
+      opacity: 1;
+    }
+
+    .service-box:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Icon */
+    .service-box .icon {
+      font-size: 2.8rem;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+
+    /* Title */
+    .service-box h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--accent);
+    }
+
+    /* Description */
+    .service-box p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+    }
+
+    /* List */
+    .service-box ul {
+      margin-top: 10px;
+    }
+
+    .service-box ul li {
+      font-size: 0.9rem;
+      color: var(--text-main);
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .service-box ul li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-size: 0.8rem;
+    }
+
+    /* ===============================
+   CTA SECTION
+================================ */
+    .cta-section {
+      padding: 90px 0;
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+
+    .cta-section h2 {
+      font-size: 2.6rem;
+      margin-bottom: 10px;
+    }
+
+    .cta-section p {
+      font-size: 1.05rem;
+      opacity: 0.95;
+      margin-bottom: 30px;
+    }
+
+    /* ===============================
+   BUTTONS
+================================ */
+    .btn {
+      display: inline-block;
+      padding: 14px 36px;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: var(--secondary);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ===============================
+   RESPONSIVE
+================================ */
+    @media (max-width: 768px) {
+      .page-header h1 {
+        font-size: 2.2rem;
+      }
+
+      .cta-section h2 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .service-box {
+        padding: 1.8rem;
+      }
+
+      .service-box h3 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <%- include('partials/header') %>
+
+    <!-- Flash Messages -->
+    <%- include('partials/flash') %>
+
+      <!-- Page Header -->
+      <section class="page-header">
+        <div class="container">
+          <h1>Our Services</h1>
+          <p>Comprehensive digital solutions tailored to your needs</p>
+        </div>
+      </section>
+
+      <!-- Services -->
+      <section class="services-page">
+        <div class="container service-list">
+
+          <div class="service-box">
+            <span class="icon">🌐</span>
+            <h3>Website Development</h3>
+            <p>
+              We create responsive, fast, and SEO-optimized websites using the latest technologies.
+              From landing pages to complex web applications, we deliver results.
+            </p>
+            <ul>
+              <li>Custom Web Design</li>
+              <li>E-commerce Solutions</li>
+              <li>CMS Development</li>
+              <li>Progressive Web Apps</li>
+            </ul>
+          </div>
+
+          <div class="service-box">
+            <span class="icon">📱</span>
+            <h3>Android & Web Applications</h3>
+            <p>
+              Powerful mobile and web applications that engage users and drive growth.
+            </p>
+            <ul>
+              <li>Native Android Apps</li>
+              <li>Cross-platform Solutions</li>
+              <li>API Integration</li>
+              <li>Maintenance & Support</li>
+            </ul>
+          </div>
+
+          <div class="service-box">
+            <span class="icon">🎨</span>
+            <h3>Graphic Design</h3>
+            <p>
+              Creative designs for festivals, marketing campaigns, and brand identity.
+            </p>
+            <ul>
+              <li>Festival Posters</li>
+              <li>Social Media Graphics</li>
+              <li>Brand Identity</li>
+              <li>Marketing Creatives</li>
+            </ul>
+          </div>
+
+          <div class="service-box">
+            <span class="icon">🎬</span>
+            <h3>Video Graphics & Motion Design</h3>
+            <p>
+              Motion graphics and video content that bring your brand to life.
+            </p>
+            <ul>
+              <li>Motion Graphics</li>
+              <li>Video Editing</li>
+              <li>Animated Explainers</li>
+              <li>Social Media Videos</li>
+            </ul>
+          </div>
+
+          <div class="service-box">
+            <span class="icon">🤖</span>
+            <h3>Machine Learning & AI Models</h3>
+            <p>
+              Intelligent AI solutions to automate processes and gain insights.
+            </p>
+            <ul>
+              <li>Custom ML Models</li>
+              <li>Natural Language Processing</li>
+              <li>Computer Vision</li>
+              <li>Predictive Analytics</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta-section">
+        <div class="container">
+          <h2>Interested in Our Services?</h2>
+          <p>Let’s discuss how we can help you achieve your goals</p>
+          <a href="/quote" class="btn btn-primary">Request a Quote</a>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <%- include('partials/footer') %>
+
+</body>
+
+</html>

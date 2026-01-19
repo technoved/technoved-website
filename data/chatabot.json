@@ -1,0 +1,47 @@
+[
+    {
+        "keywords": [
+            "services",
+            "what do you do"
+        ],
+        "answer": "We provide website development, mobile apps, graphic design, video graphics, and AI/ML solutions."
+    },
+    {
+        "keywords": [
+            "website",
+            "web"
+        ],
+        "answer": "Yes, we build modern, fast, and responsive websites."
+    },
+    {
+        "keywords": [
+            "app",
+            "android",
+            "mobile"
+        ],
+        "answer": "We develop Android and cross-platform mobile applications."
+    },
+    {
+        "keywords": [
+            "ai",
+            "ml",
+            "machine learning"
+        ],
+        "answer": "Yes, we provide AI & Machine Learning solutions tailored to business needs."
+    },
+    {
+        "keywords": [
+            "price",
+            "cost",
+            "pricing"
+        ],
+        "answer": "Project cost depends on requirements. Please contact us for a detailed quote."
+    },
+    {
+        "keywords": [
+            "contact",
+            "reach"
+        ],
+        "answer": "You can contact us via the Contact page or email us directly."
+    }
+]

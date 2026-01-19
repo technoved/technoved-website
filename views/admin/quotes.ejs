@@ -1,0 +1,103 @@
+<h1 class="admin-title">Quote Requests</h1>
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/admin.css">
+
+<style>
+  select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+  }
+
+  option[value="New"] { color: #facc15; }
+  option[value="In Progress"] { color: #38bdf8; }
+  option[value="Completed"] { color: #22c55e; }
+
+  .action-buttons {
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn-delete {
+    background: #dc2626;
+    color: #fff;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .btn-delete:hover {
+    background: #b91c1c;
+  }
+</style>
+
+<% if (quotes && quotes.length > 0) { %>
+<div class="table-wrapper">
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Service</th>
+        <th>Budget</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% quotes.forEach((q, index) => { %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= q.name %></td>
+        <td><%= q.email %></td>
+        <td><%= q.phone %></td>
+        <td><%= q.serviceType %></td>
+        <td><%= q.budget || '—' %></td>
+        <td><%= q.createdAt.toDateString() %></td>
+
+        <!-- STATUS -->
+        <td>
+          <form action="/admin/quotes/status/<%= q._id %>" method="POST">
+            <select name="status" onchange="this.form.submit()">
+              <option value="New" <%= q.status === 'New' ? 'selected' : '' %>>New</option>
+              <option value="In Progress" <%= q.status === 'In Progress' ? 'selected' : '' %>>In Progress</option>
+              <option value="Completed" <%= q.status === 'Completed' ? 'selected' : '' %>>Completed</option>
+            </select>
+          </form>
+        </td>
+
+        <!-- ACTIONS -->
+        <td>
+          <div class="action-buttons">
+            <% if (q.status === 'Completed') { %>
+              <form action="/admin/quotes/convert/<%= q._id %>" method="POST">
+                <button class="btn-primary">Create Project</button>
+              </form>
+            <% } %>
+
+            <form
+              action="/admin/quotes/delete/<%= q._id %>"
+              method="POST"
+              onsubmit="return confirm('Delete this quote?')"
+            >
+              <button class="btn-delete">Delete</button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<% } else { %>
+  <div class="empty-state">
+    <p>No quote requests yet.</p>
+  </div>
+<% } %>

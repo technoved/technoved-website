@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Contacts | TechnoVED</title>
+</head>
+
+<style>
+/* ===============================
+   ADMIN CONTACTS – VIOLET THEME
+================================ */
+
+body {
+  background: #f5f3ff;
+}
+
+/* Container */
+.admin-contacts {
+  max-width: 800px;
+  margin: 60px auto;
+}
+
+/* Page Title */
+.admin-contacts h1 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #5b21b6;
+}
+
+/* ===============================
+   CONTACT ITEM
+================================ */
+
+.contact-item {
+  background: #ffffff;
+  border-radius: 16px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.18);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 45px rgba(124, 58, 237, 0.35);
+}
+
+/* ===============================
+   SUMMARY (NAME ROW)
+================================ */
+
+.contact-name {
+  padding: 18px 22px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.05rem;
+  list-style: none;
+  position: relative;
+  color: #1e1b4b;
+  background: linear-gradient(
+    90deg,
+    rgba(124, 58, 237, 0.06),
+    transparent
+  );
+}
+
+/* Remove default arrow */
+.contact-name::-webkit-details-marker {
+  display: none;
+}
+
+/* Arrow */
+.contact-name::after {
+  content: "▾";
+  position: absolute;
+  right: 22px;
+  font-size: 1.2rem;
+  color: #7c3aed;
+  transition: transform 0.3s ease;
+}
+
+/* Rotate arrow */
+.contact-item[open] .contact-name::after {
+  transform: rotate(180deg);
+}
+
+/* ===============================
+   DETAILS
+================================ */
+
+.contact-details {
+  padding: 20px 22px;
+  background: #faf7ff;
+  border-top: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+.contact-details p {
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.contact-details strong {
+  color: #7c3aed;
+}
+
+/* ===============================
+   ACTIONS
+================================ */
+
+.contact-actions {
+  margin-top: 16px;
+  text-align: right;
+}
+
+/* Delete Button */
+.btn-delete {
+  padding: 8px 18px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  background: linear-gradient(
+    135deg,
+    #7c3aed,
+    #5b21b6
+  );
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.35);
+  transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(124, 58, 237, 0.5);
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 600px) {
+  .contact-name {
+    font-size: 1rem;
+  }
+}
+</style>
+
+<body>
+
+  <div class="admin-contacts">
+    <h1>Contact Requests</h1>
+
+    <% contacts.forEach(c => { %>
+      <details class="contact-item">
+
+        <summary class="contact-name">
+          <%= c.name %>
+        </summary>
+
+        <div class="contact-details">
+          <p><strong>Email:</strong> <%= c.email %></p>
+          <p><strong>Message:</strong> <%= c.message %></p>
+
+          <div class="contact-actions">
+            <form action="/admin/contacts/delete/<%= c._id %>" method="POST">
+              <button type="submit" class="btn-delete">
+                Delete
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </details>
+    <% }) %>
+
+  </div>
+
+</body>
+</html>

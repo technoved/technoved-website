@@ -1,0 +1,172 @@
+<link rel="stylesheet" href="/static/css/chatbot.css">
+<style>
+    #chatbot-toggle {
+        position: fixed;
+        bottom: 22px;
+        right: 22px;
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: #fff;
+        font-size: 1.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: var(--shadow-lg);
+        z-index: 9999;
+    }
+
+    #chatbot {
+        position: fixed;
+        bottom: 90px;
+        right: 22px;
+        width: 320px;
+        background: var(--bg-card);
+        border-radius: 18px;
+        display: none;
+        flex-direction: column;
+        box-shadow: var(--shadow-lg);
+        z-index: 9999;
+    }
+
+    .chat-header {
+        padding: 14px;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border-radius: 18px 18px 0 0;
+    }
+
+    .chat-body {
+        padding: 14px;
+        height: 260px;
+        overflow-y: auto;
+        font-size: 0.9rem;
+    }
+
+    .chat-suggestions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .chat-suggestions button {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        border: 1px solid var(--border-color);
+        background: transparent;
+        color: var(--text-muted);
+        cursor: pointer;
+    }
+
+    .chat-suggestions button:hover {
+        background: var(--primary-color);
+        color: #fff;
+    }
+
+    .chat-input {
+        display: flex;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .chat-input input {
+        flex: 1;
+        padding: 10px;
+        background: transparent;
+        border: none;
+        color: var(--text-main);
+    }
+
+    .chat-input button {
+        padding: 10px 14px;
+        background: var(--primary-color);
+        border: none;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .msg {
+        margin-bottom: 8px;
+    }
+
+    .msg.user {
+        color: var(--text-main);
+    }
+
+    .msg.bot {
+        color: var(--text-muted);
+    }
+</style>
+<div id="chatbot-toggle">💬</div>
+
+<div id="chatbot">
+    <div class="chat-header">TechnoVED Assistant</div>
+
+    <div class="chat-body" id="chatBody">
+        <div class="chat-suggestions">
+            <button onclick="quickQuestion('What services do you provide?')">Services</button>
+            <button onclick="quickQuestion('Do you build websites?')">Websites</button>
+            <button onclick="quickQuestion('Do you build mobile apps?')">Apps</button>
+            <button onclick="quickQuestion('Do you provide AI solutions?')">AI / ML</button>
+            <button onclick="quickQuestion('How much does a project cost?')">Pricing</button>
+        </div>
+    </div>
+
+    <div class="chat-input">
+        <input id="userInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter') sendMessage()" />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    const chatbot = document.getElementById("chatbot");
+    const toggle = document.getElementById("chatbot-toggle");
+
+    toggle.onclick = () => {
+        chatbot.style.display = chatbot.style.display === "flex" ? "none" : "flex";
+    };
+
+    function quickQuestion(text) {
+        document.getElementById("userInput").value = text;
+        sendMessage();
+    }
+
+    function sendMessage() {
+        const input = document.getElementById("userInput");
+        const msg = input.value.trim();
+        if (!msg) return;
+
+        const suggestions = document.querySelector(".chat-suggestions");
+        if (suggestions) suggestions.style.display = "none";
+
+        addMessage("You", msg);
+
+        fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: msg })
+        })
+            .then(res => res.json())
+            .then(data => addMessage("Bot", data.reply));
+
+        input.value = "";
+    }
+
+    function addMessage(sender, text) {
+        const chatBody = document.getElementById("chatBody");
+        const div = document.createElement("div");
+        div.className = sender === "You" ? "msg user" : "msg bot";
+        div.innerHTML = `<b>${sender}:</b> ${text}`;
+        chatBody.appendChild(div);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    window.onload = () => {
+        addMessage("Bot", "Hi 👋 How can I help you today?");
+    };
+
+</script>
