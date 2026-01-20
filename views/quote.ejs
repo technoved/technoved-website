@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>
+    <%= title %> | TechnoVED
+  </title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<style>
+  /* ===============================
+   QUOTE FORM – VIOLET THEME
+   (ONLY FORM STYLED)
+================================ */
+
+  .contact-section {
+    padding: 90px 0;
+  }
+
+  .contact-content {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Form Card */
+  .contact-form {
+    width: 100%;
+    max-width: 560px;
+    background: linear-gradient(180deg,
+        rgba(124, 58, 237, 0.05),
+        rgba(124, 58, 237, 0.02));
+    padding: 40px;
+    border-radius: 18px;
+    border: 1px solid rgba(124, 58, 237, 0.25);
+    box-shadow: 0 10px 30px rgba(124, 58, 237, 0.25);
+    transition: all 0.3s ease;
+  }
+
+  .contact-form:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(124, 58, 237, 0.45);
+  }
+
+  /* Title */
+  .contact-form h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 700;
+  }
+
+  /* ===============================
+   FORM FIELDS
+================================ */
+
+  .form-group {
+    margin-bottom: 1.6rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 10px;
+    border: 2px solid rgba(124, 58, 237, 0.25);
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    /* ✅ TEXT COLOR FIX */
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+  }
+
+  /* Placeholder */
+  .form-group input::placeholder {
+    color: rgba(167, 139, 250, 0.7);
+  }
+
+  /* Focus state */
+  .form-group input:focus {
+    outline: none;
+    border-color: #7c3aed;
+    background: rgba(255, 255, 255, 0.12);
+    /* ❌ don't turn pure white */
+    color: #ffffff;
+    /* ✅ KEEP TEXT WHITE */
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.18);
+  }
+
+  /* Autofill fix (VERY IMPORTANT) */
+  .form-group input:-webkit-autofill {
+    -webkit-text-fill-color: #ffffff !important;
+    box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.12) inset;
+    transition: background-color 9999s ease-in-out 0s;
+  }
+
+
+  /* ===============================
+   BUTTON
+================================ */
+
+  .btn-block {
+    width: 100%;
+  }
+
+  .contact-form .btn-primary {
+    padding: 13px;
+    border-radius: 12px;
+    font-weight: 600;
+    background: linear-gradient(135deg,
+        #7c3aed,
+        #5b21b6);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(124, 58, 237, 0.35);
+    transition: all 0.3s ease;
+  }
+
+  .contact-form .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px rgba(124, 58, 237, 0.5);
+  }
+
+  /* ===============================
+   MOBILE
+================================ */
+  @media (max-width: 600px) {
+    .contact-form {
+      padding: 28px;
+    }
+  }
+</style>
+
+<body>
+
+  <%- include('partials/header') %>
+    <%- include('partials/flash') %>
+
+      <section class="contact-section">
+        <div class="container contact-content">
+
+          <div class="contact-form">
+            <h2>Request a Quote</h2>
+
+            <form action="/quote" method="POST">
+
+
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="name" required>
+              </div>
+
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" required>
+              </div>
+
+              <div class="form-group">
+                <label>Phone</label>
+                <input type="text" name="phone" required>
+              </div>
+
+              <div class="form-group">
+                <label>Service</label>
+                <input type="text" name="serviceType" required>
+              </div>
+
+              <div class="form-group">
+                <label>Budget</label>
+                <input type="text" name="budget">
+              </div>
+
+              <button class="btn btn-primary btn-block">
+                Submit Quote
+              </button>
+
+            </form>
+          </div>
+
+        </div>
+      </section>
+
+      <%- include('partials/footer') %>
+</body>
+
+</html>

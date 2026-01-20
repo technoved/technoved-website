@@ -1,0 +1,30 @@
+<h1 class="admin-title">Projects</h1>
+
+<link rel="stylesheet" href="/css/admin.css">
+
+<% if (projects.length > 0) { %>
+<table class="admin-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Client</th>
+      <th>Service</th>
+      <th>Status</th>
+      <th>Created</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% projects.forEach((p, i) => { %>
+      <tr>
+        <td><%= i + 1 %></td>
+        <td><%= p.clientName %></td>
+        <td><%= p.serviceType %></td>
+        <td><%= p.status %></td>
+        <td><%= p.createdAt.toDateString() %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+<% } else { %>
+  <p>No projects yet.</p>
+<% } %>

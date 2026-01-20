@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Add Review | TechnoVED</title>
+
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet" />
+</head>
+<style>
+    /* ===============================
+   REVIEW FORM PAGE
+================================ */
+    .review-form-section {
+        padding: 100px 0;
+    }
+
+    /* Card */
+    .review-form {
+        max-width: 520px;
+        margin: auto;
+        background: var(--bg-card);
+        padding: 42px;
+        border-radius: 20px;
+        border: 1px solid var(--border-color);
+        box-shadow: var(--shadow-lg);
+    }
+
+    /* Heading (if any inside form) */
+    .review-form h3 {
+        text-align: center;
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+        color: var(--primary-color);
+    }
+
+    /* ===============================
+   FORM GROUP
+================================ */
+    .review-form .form-group {
+        margin-bottom: 22px;
+    }
+
+    .review-form label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--text-main);
+    }
+
+    /* Inputs */
+    .review-form input,
+    .review-form textarea {
+        width: 100%;
+        padding: 14px 15px;
+        border-radius: 12px;
+        border: 2px solid rgba(124, 58, 237, 0.25);
+        background: transparent;
+        color: var(--text-main);
+        font-size: 0.95rem;
+        transition: var(--transition);
+    }
+
+    .review-form textarea {
+        min-height: 140px;
+        resize: vertical;
+    }
+
+    /* Focus */
+    .review-form input:focus,
+    .review-form textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        background: rgba(124, 58, 237, 0.06);
+        box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.18);
+    }
+
+    /* ===============================
+   SUBMIT BUTTON
+================================ */
+    .review-form .btn {
+        width: 100%;
+        padding: 14px;
+        font-weight: 700;
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+    }
+
+    .review-form .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    /* ===============================
+   RESPONSIVE
+================================ */
+    @media (max-width: 576px) {
+        .review-form {
+            padding: 32px 24px;
+        }
+    }
+
+    /* ===============================
+   STAR RATING
+================================ */
+    .star-rating {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-start;
+        gap: 8px;
+    }
+
+    .star-rating input {
+        display: none;
+    }
+
+    .star-rating label {
+        font-size: 2rem;
+        color: #d1d5db;
+        /* gray */
+        cursor: pointer;
+        transition: color 0.25s ease, transform 0.2s ease;
+    }
+
+    /* Hover effect */
+    .star-rating label:hover,
+    .star-rating label:hover~label {
+        color: #fbbf24;
+        /* yellow */
+        transform: scale(1.1);
+    }
+
+    /* Selected stars */
+    .star-rating input:checked~label {
+        color: #f59e0b;
+    }
+</style>
+
+<body>
+
+    <%- include("partials/header") %>
+        <%- include("partials/flash") %>
+
+            <section class="page-header">
+                <div class="container">
+                    <h1>Add Your Review</h1>
+                    <p>We value your feedback</p>
+                </div>
+            </section>
+
+            <section class="review-form-section">
+                <div class="container">
+
+                    <form class="review-form" action="/review" method="POST">
+
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" name="name" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Your Role</label>
+                            <input type="text" name="role" placeholder="Client / Founder" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Your Review</label>
+                            <textarea name="message" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Your Rating</label>
+
+                            <div class="star-rating">
+                                <input type="radio" name="rating" id="star5" value="5" required />
+                                <label for="star5">★</label>
+
+                                <input type="radio" name="rating" id="star4" value="4" />
+                                <label for="star4">★</label>
+
+                                <input type="radio" name="rating" id="star3" value="3" />
+                                <label for="star3">★</label>
+
+                                <input type="radio" name="rating" id="star2" value="2" />
+                                <label for="star2">★</label>
+
+                                <input type="radio" name="rating" id="star1" value="1" />
+                                <label for="star1">★</label>
+                            </div>
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Submit Review
+                        </button>
+
+                    </form>
+
+                </div>
+            </section>
+
+            <%- include("partials/footer") %>
+
+</body>
+
+</html>

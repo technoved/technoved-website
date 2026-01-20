@@ -1,0 +1,106 @@
+<style>
+/* ===============================
+   FLASH / TOAST NOTIFICATIONS
+================================ */
+
+.flash-container {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Base flash */
+.flash {
+  width: 320px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #fff;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+  animation: toastIn 0.4s ease, toastOut 0.4s ease 3.6s forwards;
+}
+
+/* Success */
+.flash-success {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border-left: 5px solid #15803d;
+}
+
+/* Error */
+.flash-error {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  border-left: 5px solid #991b1b;
+}
+
+/* Animations */
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toastOut {
+  to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .flash-container {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    top: 16px;
+  }
+
+  .flash {
+    width: 92vw;
+    text-align: center;
+  }
+}
+</style>
+
+<!-- ===============================
+     FLASH MESSAGES (EJS)
+================================ -->
+
+<div class="flash-container">
+
+  <% if (success && success.length > 0) { %>
+    <div class="flash flash-success">
+      <%= success %>
+    </div>
+
+  <% } else if (error && error.length > 0) { %>
+    <div class="flash flash-error">
+      <%= error %>
+    </div>
+  <% } %>
+
+</div>
+
+
+<!-- ===============================
+     AUTO REMOVE SCRIPT
+================================ -->
+
+<script>
+  setTimeout(() => {
+    document.querySelectorAll('.flash').forEach(flash => {
+      flash.remove();
+    });
+  }, 4200);
+</script>

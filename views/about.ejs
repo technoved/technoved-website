@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>
+    <%= title || "About" %> | TechnoVED
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+    rel="stylesheet" />
+</head>
+<style>
+  /* ===============================
+   PAGE HEADER
+================================ */
+  .page-header {
+    padding: 110px 0 70px;
+    text-align: center;
+    background: linear-gradient(135deg,
+        rgba(127, 58, 161, 0.15),
+        rgba(84, 22, 181, 0.12));
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .page-header h1 {
+    font-size: 3.2rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+
+  .page-header p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    opacity: 0.9;
+  }
+
+  /* ===============================
+   ABOUT SECTION
+================================ */
+  .about-section {
+    padding: 100px 0;
+  }
+
+  .about-content {
+    max-width: 820px;
+    margin: auto;
+    padding: 70px 50px;
+    text-align: center;
+
+    background: linear-gradient(180deg,
+        rgba(127, 58, 161, 0.06),
+        transparent);
+
+    border-radius: 24px;
+    border: 1px solid var(--border-color);
+  }
+
+  .about-content h2 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 1.6rem;
+    background: linear-gradient(135deg,
+        var(--primary-color),
+        var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .about-content p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--text-muted);
+    max-width: 720px;
+    margin: 0 auto 1.8rem;
+  }
+
+  .about-content h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 2.2rem auto;
+    max-width: 700px;
+    color: var(--primary-color);
+  }
+
+  /* ===============================
+   ABOUT REVIEW BUTTON
+================================ */
+  .about-review-btn {
+    margin-top: 45px;
+    margin-bottom: 45px;
+    display: flex;
+    justify-content: center;
+    /* center button */
+  }
+
+  /* BUTTON ITSELF */
+  .about-review-btn .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 14px 36px;
+    font-size: 0.95rem;
+    font-weight: 700;
+
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+
+    background: linear-gradient(135deg,
+        var(--primary-color),
+        var(--secondary-color));
+
+    color: #fff;
+    border: none;
+    white-space: nowrap;
+  }
+
+  /* HOVER */
+  .about-review-btn .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* ===============================
+   REVIEWS SECTION
+================================ */
+  .reviews-section {
+    padding: 100px 0;
+  }
+
+  .reviews-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .reviews-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+  }
+
+  .reviews-header p {
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: auto;
+  }
+
+  /* ===============================
+   REVIEWS GRID
+================================ */
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.4rem;
+  }
+
+  /* ===============================
+   REVIEW CARD
+================================ */
+  .review-card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 2.4rem;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+  }
+
+  .review-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: 20px;
+    background: linear-gradient(135deg,
+        var(--primary-color),
+        var(--secondary-color));
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .review-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* ===============================
+   STARS
+================================ */
+  .review-stars {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1.1rem;
+  }
+
+  .review-stars span {
+    font-size: 1.15rem;
+    color: #d1d5db;
+  }
+
+  .review-stars .filled {
+    color: #facc15;
+  }
+
+  /* ===============================
+   REVIEW TEXT
+================================ */
+  .review-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 1.4rem;
+  }
+
+  /* ===============================
+   USER INFO
+================================ */
+  .review-card h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: 2px;
+  }
+
+  .review-card span {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    opacity: 0.75;
+  }
+
+  /* ===============================
+   RESPONSIVE
+================================ */
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2.4rem;
+    }
+
+    .about-content {
+      padding: 50px 28px;
+    }
+
+    .about-content h2 {
+      font-size: 2.2rem;
+    }
+  }
+</style>
+
+</style>
+
+<body>
+
+  <!-- Header -->
+  <%- include("partials/header") %>
+    <%- include("partials/flash") %>
+
+      <!-- Page Header -->
+      <section class="page-header">
+        <div class="container">
+          <h1>About Us</h1>
+          <p>Who we are & what we do</p>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section class="about-section">
+        <div class="container about-content">
+          <h2>TechnoVED</h2>
+
+          <p>
+            TechnoVED is a modern digital solutions company focused on helping businesses grow through technology,
+            creativity, and innovation. We specialize in building powerful digital products that transform ideas into
+            real-world solutions.
+
+            From websites and mobile applications to graphic design, video creatives, and AI/ML solutions, TechnoVED
+            delivers end-to-end digital services tailored to your business needs.
+            <br><br>
+          <h3><b>Our goal is simple:</b>
+            Create smart, scalable, and impactful digital experiences that help brands stand out in a competitive world.
+          </h3>
+          </p>
+
+          <p>
+            Our mission is to help businesses grow by transforming ideas into
+            powerful digital experiences.
+          </p>
+
+          <!-- Add Review Button -->
+          <div class="about-review-btn">
+            <a href="/review" class="btn btn-primary">
+              Add Your Review
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reviews Section -->
+      <section class="reviews-section">
+        <div class="container">
+
+          <div class="reviews-header">
+            <h2>What Our Clients Say</h2>
+            <p>Real feedback from our clients</p>
+          </div>
+
+          <div class="reviews-grid">
+
+            <% if (reviews.length> 0) { %>
+
+              <% reviews.forEach(review=> { %>
+                <div class="review-card">
+
+                  <!-- STAR RATING -->
+                  <div class="review-stars">
+                    <% for (let i=1; i <=5; i++) { %>
+                      <span class="<%= i <= review.rating ? 'filled' : '' %>">★</span>
+                      <% } %>
+                  </div>
+
+                  <p class="review-text">
+                    <%= review.message %>
+                  </p>
+
+                  <h4>
+                    <%= review.name %>
+                  </h4>
+                  <span>
+                    <%= review.role %>
+                  </span>
+
+                </div>
+                <% }) %>
+
+                  <% } else { %>
+
+                    <p class="text-center">
+                      No reviews yet. add your review.!
+                    </p>
+
+                    <% } %>
+
+          </div>
+
+        </div>
+      </section>
+
+
+
+      <!-- Footer -->
+      <%- include("partials/footer") %>
+
+</body>
+
+</html>

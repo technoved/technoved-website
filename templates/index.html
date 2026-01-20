@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<style>
+    #chatbot-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: #7F3AA1;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    #chatbot {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 320px;
+        background: #140A2E;
+        border-radius: 16px;
+        display: none;
+        flex-direction: column;
+    }
+
+    .chat-header {
+        padding: 14px;
+        font-weight: bold;
+        color: #fff;
+        background: linear-gradient(135deg, #7F3AA1, #5416B5);
+    }
+
+    .chat-body {
+        padding: 14px;
+        height: 260px;
+        overflow-y: auto;
+        color: #fff;
+    }
+
+    .chat-input {
+        display: flex;
+        border-top: 1px solid #2b1366;
+    }
+
+    .chat-input input {
+        flex: 1;
+        padding: 10px;
+        background: transparent;
+        border: none;
+        color: #fff;
+    }
+
+    .chat-input button {
+        padding: 10px 14px;
+        background: #7F3AA1;
+        border: none;
+        color: #fff;
+    }
+</style>
+
+<body>
+
+    
+    <div id="chatbot-toggle">💬</div>
+
+    <div id="chatbot">
+        <div class="chat-header">TechnoVED Assistant</div>
+        <div class="chat-body" id="chatBody"></div>
+
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type a message..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script src="/static/js/chat.js"></script>
+</body>
+
+</html>
+<script>
+    const chatbot = document.getElementById("chatbot");
+    const toggle = document.getElementById("chatbot-toggle");
+
+    toggle.onclick = () => {
+        chatbot.style.display =
+            chatbot.style.display === "flex" ? "none" : "flex";
+    };
+
+    function sendMessage() {
+        const input = document.getElementById("userInput");
+        const msg = input.value.trim();
+        if (!msg) return;
+
+        addMessage("You", msg);
+
+        fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: msg })
+        })
+            .then(res => res.json())
+            .then(data => addMessage("Bot", data.reply));
+
+        input.value = "";
+    }
+
+    function addMessage(sender, text) {
+        const chatBody = document.getElementById("chatBody");
+        const div = document.createElement("div");
+        div.innerHTML = `<b>${sender}:</b> ${text}`;
+        chatBody.appendChild(div);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+</script>

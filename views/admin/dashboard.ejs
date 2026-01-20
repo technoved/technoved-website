@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard | TechnoVED</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/admin.css">
+
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<style>
+  /* ===============================
+   ADMIN DASHBOARD LAYOUT
+================================ */
+
+  .dashboard {
+    display: flex;
+    min-height: 100vh;
+    background: var(--bg-black);
+    color: var(--text-main);
+  }
+
+  /* ===============================
+   SIDEBAR
+================================ */
+
+  .sidebar {
+    width: 240px;
+    background: var(--bg-card);
+    padding: 2rem 1.5rem;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .sidebar .logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  .logo-tech {
+    color: var(--primary-color);
+  }
+
+  .logo-ved {
+    color: #fff;
+  }
+
+  .sidebar nav a {
+    display: block;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    color: #cbd5f5;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: var(--transition);
+  }
+
+  .sidebar nav a:hover,
+  .sidebar nav a.active {
+    background: var(--primary-color);
+    color: #fff;
+  }
+
+  /* ===============================
+   MAIN CONTENT
+================================ */
+
+  .main {
+    flex: 1;
+    padding: 2rem;
+  }
+
+  .topbar h1 {
+    font-size: 1.9rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+
+  /* ===============================
+   STATS CARDS
+================================ */
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    background: var(--bg-card);
+    padding: 1.6rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .stat-card h4 {
+    font-size: 0.95rem;
+    color: #c7d2fe;
+    margin-bottom: 10px;
+  }
+
+  .stat-card p {
+    font-size: 2.1rem;
+    font-weight: 700;
+  }
+
+  /* Card Accent Colors */
+  .stat-card.violet {
+    border-left: 4px solid #7c3aed;
+  }
+
+  .stat-card.blue {
+    border-left: 4px solid #38bdf8;
+  }
+
+  .stat-card.green {
+    border-left: 4px solid #22c55e;
+  }
+
+  /* Target Input */
+  .stat-card input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: none;
+    background: #0f172a;
+    color: #fff;
+    outline: none;
+  }
+
+  .stat-card button {
+    width: 100%;
+    padding: 10px;
+    background: var(--primary-color);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .stat-card button:hover {
+    opacity: 0.9;
+  }
+
+  /* ===============================
+   GRAPH SECTIONS
+================================ */
+
+  .graph-section {
+    margin-top: 3rem;
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    max-width: 520px;
+  }
+
+  .graph-section h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  /* ===============================
+   RESPONSIVE
+================================ */
+
+  @media (max-width: 900px) {
+    .dashboard {
+      flex-direction: column;
+    }
+
+    .sidebar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sidebar nav {
+      display: flex;
+      gap: 10px;
+    }
+
+    .sidebar nav a {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .stats {
+      grid-template-columns: 1fr;
+    }
+
+    .graph-section {
+      max-width: 100%;
+    }
+  }
+
+  .graph-section canvas {
+    width: 100% !important;
+    height: 260px !important;
+    display: block;
+  }
+</style>
+
+<body>
+
+  <div class="dashboard">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h2 class="logo">
+        <span class="logo-tech">TECHNO</span>
+        <span class="logo-ved">VED</span>
+      </h2>
+
+      <nav>
+        <a class="active" href="/admin/dashboard">Dashboard</a>
+        <a href="/admin/quotes">Quotes</a>
+        <a href="/admin/contacts">Contacts</a>
+        <a href="/admin/projects">Projects</a>
+
+        <a href="/admin/logout">Logout</a>
+      </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <header class="topbar">
+        <h1>Admin Dashboard</h1>
+      </header>
+
+      <!-- STATS -->
+      <section class="stats">
+        <div class="stat-card violet">
+          <h4>Total Quotes</h4>
+          <p>
+            <%= totalQuotes %>
+          </p>
+        </div>
+
+        <div class="stat-card blue">
+          <h4>Total Contacts</h4>
+          <p>
+            <%= totalContacts %>
+          </p>
+        </div>
+
+        <div class="stat-card green">
+          <h4>Completion Target</h4>
+          <input type="number" id="targetInput" value="<%= target %>" min="1">
+          <button onclick="updateChart()">Update</button>
+        </div>
+      </section>
+
+      <!-- DOUGHNUT GRAPH -->
+      <section class="graph-section">
+        <h3>Quotes Progress</h3>
+        <canvas id="quoteChart"></canvas>
+      </section>
+
+      <!-- MONTHLY GRAPH -->
+      <section class="graph-section">
+        <h3>Monthly Quotes</h3>
+        <canvas id="monthlyChart"></canvas>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ================= BACKEND DATA ================= -->
+  <script>
+    let totalQuotes = <% - JSON.stringify(totalQuotes) %>;
+    let totalContacts = <% - JSON.stringify(totalContacts) %>;
+    let target = <% - JSON.stringify(target) %>;
+    let monthlyQuotes = <% - JSON.stringify(monthlyQuotes || []) %>;
+  </script>
+
+  <!-- ================= DASHBOARD JS ================= -->
+  <script>
+    window.addEventListener('load', () => {
+      const quoteCanvas = document.getElementById('quoteChart');
+      if (!quoteCanvas) return;
+
+      const ctx = quoteCanvas.getContext('2d');
+
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Completed Quotes', 'Remaining Target'],
+          datasets: [{
+            data: [totalQuotes, Math.max(target - totalQuotes, 0)],
+            backgroundColor: ['#7c3aed', '#1e293b'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '70%',
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { color: '#fff' }
+            }
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>

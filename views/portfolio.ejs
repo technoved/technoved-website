@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>
+    <%= title || 'Portfolio' %> | TechnoVED
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+
+<style>
+  
+  /* ===============================
+   PAGE HEADER
+================================ */
+  .page-header {
+    padding: 100px 0 60px;
+    text-align: center;
+    background: linear-gradient(135deg,
+        rgba(124, 58, 237, 0.18),
+        rgba(91, 33, 182, 0.12));
+  }
+
+  .page-header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+  }
+
+  .page-header p {
+    color: var(--text-muted);
+  }
+
+  /* ===============================
+   PORTFOLIO
+================================ */
+  .portfolio-section {
+    padding: 100px 0;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .portfolio-card {
+    background: var(--bg-card);
+    padding: 36px 28px;
+    border-radius: 18px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+  }
+
+  .portfolio-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+  }
+
+  .portfolio-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    padding: 7px 16px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+  }
+
+  /* ===============================
+   TEAM SECTION
+================================ */
+  .team-section {
+    padding: 100px 0;
+    background: var(--bg-light);
+  }
+
+  .team-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  /* GRID FIX: 3 + 2 */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    justify-items: center;
+  }
+
+  /* Center second row */
+  .team-card:nth-child(4) {
+    grid-column: 1 / 2;
+  }
+
+  .team-card:nth-child(5) {
+    grid-column: 2 / 3;
+  }
+
+  /* ===============================
+   TEAM CARD
+================================ */
+  .team-card {
+    width: 100%;
+    max-width: 300px;
+    background: var(--bg-card);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    height: 270px;
+    text-align: center;
+    transition: all 0.35s ease;
+    overflow: hidden;
+    border-top: 0.1px solid white;
+  }
+
+  .team-card:hover {
+    height: 470px;
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Image */
+  .team-image img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--primary-color);
+    margin-left: 3.5rem;
+    margin-bottom: 14px;
+  }
+
+  /* Info */
+  .team-info {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.35s ease;
+  }
+
+  .team-card:hover .team-info {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .team-info h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .team-info span {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+  }
+
+  .team-info p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  /* Social */
+  .team-social {
+    display: inline-grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    font-size: 1rem;
+  }
+
+  /* ===============================
+   FLOATING SOCIALS
+================================ */
+  .floating-socials {
+    position: fixed;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 999;
+  }
+
+  .floating-socials a {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 1.2rem;
+    box-shadow: var(--shadow);
+    z-index: 1;
+  }
+  .floating-socials a:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: var(--shadow-lg);
+}
+
+ .social-instagram {
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+}
+
+.social-linkedin {
+  background: linear-gradient(135deg, #0a66c2, #004182);
+}
+
+.social-whatsapp {
+  background: linear-gradient(135deg, #04ff00, #87f96d);
+}
+
+.social-github {
+  background: linear-gradient(135deg, #24292e, #000000);
+}
+
+  /* ===============================
+   RESPONSIVE
+================================ */
+  @media (max-width: 992px) {
+    .team-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .team-card:nth-child(4),
+    .team-card:nth-child(5) {
+      grid-column: auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+  .page-header h1 {
+    font-size: 2.3rem;
+  }
+
+  .portfolio-section {
+    padding: 80px 0;
+  }
+
+  .floating-socials {
+    right: 14px;
+  }
+
+  .floating-socials a {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+</style>
+
+<body>
+
+  <%- include('partials/header') %>
+    <%- include('partials/flash') %>
+
+      <!-- Header -->
+      <section class="page-header">
+        <div class="container">
+          <h1>Our Portfolio</h1>
+          <p>Some of our recent work</p>
+        </div>
+      </section>
+
+      <!-- Portfolio -->
+      <section class="portfolio-section">
+        <div class="container portfolio-grid">
+          <div class="portfolio-card">
+            <h2>Business Website</h2>
+            <p>Responsive company website built with MERN stack.</p> <span class="portfolio-tag">Web Development</span>
+          </div>
+
+          <div class="portfolio-card">
+            <h2>Android App</h2>
+            <p>Mobile application for service booking.</p> <span class="portfolio-tag">App Development</span>
+          </div>
+
+          <div class="portfolio-card">
+            <h2>Video Shoot</h2>
+            <p>Mobile application for service booking.</p> <span class="portfolio-tag">Videos</span>
+          </div>
+
+          <div class="portfolio-card">
+            <h2>Festival Posters</h2>
+            <p>Creative posters designed for marketing campaigns.</p> <span class="portfolio-tag">Graphic Design</span>
+          </div>
+          <div class="portfolio-card">
+            <h2>AI Prediction Model</h2>
+            <p>Machine learning model for data prediction.</p> <span class="portfolio-tag">AI / ML</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Team -->
+      <section class="team-section">
+        <div class="container">
+          <div class="team-header">
+            <h2>Our Team</h2>
+            <p>Meet the people behind TechnoVED</p>
+          </div>
+
+          <div class="team-grid">
+            <% const team=[ {name:'Harshal Mahajan', role:'MERN Stack Developer', email:'mahajanharshal36@gmail.com',
+              img:'team1.jpg', info:'Passionate MERN Stack Developer delivering fast, secure, and scalable web solutions with modern UI and robust backend architecture.',contact:'+91 9834851781',insta:'https://www.instagram.com/harshal.m_?igsh=Yzl2M3k2OTJnZG11',link:'https://www.linkedin.com/in/harshal-mahajan-41b025327/?originalSubdomain=in'}, {name:'Divesh Lokhande', role:'Android Developer', email:'diveshlokhande6341@gmail.com',
+              img:'team2.jpg',info:'Android Developer crafting smooth, secure, and engaging mobile app experiences.',contact:'+91 91565 11790',insta:'https://www.instagram.com/dippp__31?igsh=bnpocnVjc3ZsbWxy',link:'https://www.linkedin.com/in/divesh-lokhande-331674330?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'}, {name:'Harshal Borse', role:'Graphic Designer', email:'boraseharshal2006@gmail.com',
+              img:'team3.jpg',info:'Graphic Designer crafting eye-catching visuals and brand identities that help businesses stand out.',contact:'+91 80801 46116',insta:'https://www.instagram.com/harshal_borse_18?igsh=MWFvNXk0OXFpdXEzag==&utm_source=ig_contact_invite',link:'https://www.linkedin.com/in/harshal-borse-a3460932a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app.'}, {name:'Harshal Patil', role:'UI/UX Designer', email:'harshyaaa1820@gmail.com',
+              img:'team4.jpg',info:'UI/UX Designer crafting visually appealing and user-friendly digital products.',contact:'+91 95790 22395',insta:'https://www.instagram.com/harshyaaa__1820?igsh=MXh4b3dqc2V2c3JxbA==',link:'https://www.linkedin.com/in/harshal-patil-b09724390?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'}, {name:'Harshal Marathe', role:'AI/ML developer', email:'harshalmarathe2006@gmail.com',
+              img:'team5.jpg',info:'We build intelligent AI and Machine Learning solutions that automate processes, analyze data, and help businesses make smarter, faster decisions for growth.',contact:'+91 84590 86314',insta:'https://www.instagram.com/harshyaaa__1820?igsh=MXh4b3dqc2V2c3JxbA==',link:'https://www.linkedin.com/in/harshal-marathe-5a4062333'}, ]; %>
+
+              <% team.forEach(m=> { %>
+                <div class="team-card">
+                  <div class="team-image">
+                    <img src="/images/<%= m.img %>" alt="<%= m.name %>">
+                    <h2>
+                      <%= m.name %>
+                    </h2>
+                  </div>
+                  <div class="team-info">
+                    
+                    <span>
+                      <h3><%= m.role %></h3>
+                    </span>
+                    <h4>
+                      <%= m.email %>
+                    </h4>
+                     <h4>
+                      <%= m.contact %>
+                    </h4>
+                    <p>
+                      <%= m.info %>
+                    </p>
+                    <span>
+                      <a href=<%= m.insta %> class="team-social"><i class="fab fa-instagram"></i></a>
+                      <a href=<%= m.link %> class="team-social"><i class="fab fa-linkedin-in"></i></a>
+                    </span>
+                  </div>
+                </div>
+                <% }) %>
+          </div>
+        </div>
+      </section>
+
+      <!-- Floating Socials -->
+      <div class="floating-socials">
+        <a href="#" class="social-linkedin"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.instagram.com/technovedpvtltd?igsh=M3pxNjVyNzl5N3A2" class="social-instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/9156511790" class="social-whatsapp"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="social-github"><i class="fab fa-github"></i></a>
+      </div>
+
+      <%- include('partials/footer') %>
+
+</body>
+
+</html>

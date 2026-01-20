@@ -1,0 +1,385 @@
+/* ===============================
+   ROOT VARIABLES (BRAND SYSTEM)
+================================ */
+:root {
+  /* Purple Brand System */
+  --primary-color: #7F3AA1;
+  --secondary-color: #5416B5;
+  --accent-color: #7F3AA1;
+
+  /* Backgrounds */
+  --bg-black: #0C0516;
+  --bg-dark-blue: #0F083B;
+  --bg-card: #140A2E;
+
+  /* Text */
+  --text-main: #ffffff;
+  --text-muted: #d6c9ff;
+
+  /* Borders */
+  --border-color: #2b1366;
+
+  /* Shadows */
+  --shadow: 0 8px 24px rgba(127, 58, 161, 0.28);
+  --shadow-lg: 0 18px 50px rgba(84, 22, 181, 0.45);
+
+  --transition: all 0.35s ease;
+}
+
+
+
+/* ===============================
+   RESET & BASE
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", "Poppins", "Segoe UI", sans-serif;
+  background-color: var(--bg-black);
+  color: var(--text-main);
+  line-height: 1.7;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ===============================
+   LAYOUT
+================================ */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* ===============================
+   HEADER / NAVBAR
+================================ */
+/* ===============================
+   HEADER
+================================ */
+
+.header {
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-radius: 0 0 1rem 1rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* ===============================
+   NAV CONTAINER
+================================ */
+
+.container.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 72px;
+  padding: 0 24px;
+}
+
+/* ===============================
+   LOGO
+================================ */
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-left: -150px;
+
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.logo-link img {
+  height: 40px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  border-radius: 8px;
+  padding: 0px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.logo1{
+   margin-left: -10.5px;
+}
+.logo-link:hover img {
+  transform: scale(1.05);
+  
+}
+
+/* ===============================
+   NAV LINKS
+================================ */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-right: -150px;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.nav-links a:hover {
+  color: var(--accent-color);
+}
+
+/* ===============================
+   BUTTON
+================================ */
+
+.btn-small {
+  background: linear-gradient(135deg,
+      var(--primary-color),
+      var(--secondary-color));
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #ffffff;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-small:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+  .nav-links {
+    gap: 18px;
+  }
+
+  .logo-link img {
+    height: 34px;
+  }
+}
+
+
+/* ===============================
+   HERO SECTION
+================================ */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  z-index: -2;
+  object-fit: cover;
+
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.hero-content {
+  max-width: 850px;
+  padding: 0 20px;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  max-width: 720px;
+  margin: auto;
+}
+
+.hero-buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ===============================
+   SERVICES
+================================ */
+.services-preview {
+  padding: 90px 0;
+}
+
+.section-title {
+  font-size: 2.6rem;
+  margin-bottom: 50px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.service-card {
+  background: var(--bg-card);
+  padding: 35px 25px;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.service-icon {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.service-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.service-card p {
+  color: var(--text-muted);
+}
+
+/* ===============================
+   PORTFOLIO
+================================ */
+.portfolio-section {
+  padding: 80px 0;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+.portfolio-card {
+  background: var(--bg-card);
+  padding: 2rem;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.portfolio-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.portfolio-tag {
+  display: inline-block;
+  margin-top: 10px;
+  background: var(--primary-color);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+/* ===============================
+   CTA SECTION
+================================ */
+.cta-section {
+  background: linear-gradient(135deg,
+      var(--primary-color),
+      var(--secondary-color));
+  padding: 90px 0;
+  text-align: center;
+}
+
+.cta-section h2 {
+  font-size: 2.6rem;
+}
+
+.cta-section p {
+  margin-bottom: 30px;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+.footer {
+  background: var(--bg-dark-blue);
+  padding: 70px 0 25px;
+  color: var(--text-muted);
+}
+
+.footer-bottom {
+  margin-top: 40px;
+  padding-top: 15px;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .hero h1 {
+    font-size: 2.3rem;
+  }
+}
